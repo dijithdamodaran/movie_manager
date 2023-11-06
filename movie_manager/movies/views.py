@@ -1,41 +1,21 @@
 from django.shortcuts import render
+from .models import movieinfo
 
 # Create your views here.
 def create(request):
     if request.POST:
-        print(request.POST.get('title'))
-        print(request.POST.get('year'))
+        title=request.POST.get('title')
+        year=request.POST.get('year')
+        desc=request.POST.get('summary')
+        movie_obj=movieinfo(title=title,year=year,description=desc)
+        movie_obj.save()
        
     return render(request,'create.html')
 
 def list(request):
-    movie_data={
-        'movies' :[
-            {
-                'title':'godfather',
-                'year':1900,
-                'summary': 'story of underworld king',
-                'sucess':False,
-                'img':'godfather.jpg'
-            },
-            {
-                'title': 'titanic',
-                'year': 2002,
-                'summary': '',
-                'sucess': True,
-                'img':'titanic.jpg'
-            },
-            {
-                'title': 'avatar',
-                'year': 1990,
-                'summary': 'story of underworld king',
-                'sucess': False,
-                'img':'avatar.jpg'
-            }
-        ]
-    }
-    
-    return render(request,'list.html',movie_data)
+    movie_set=movieinfo.objects.all()
+    print(movie_set)
+    return render(request,'list.html',{'movies':movie_set})
 
 def edit(request):
     return render(request,'edit.html')

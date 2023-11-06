@@ -9,8 +9,8 @@
 {% load static %}
 {% for m in movies %}
 <h1> Title:{{m.title | upper }} </h1>
-<img src="{% static 'images/' %}{{ m.img }}" width="200" height="200">
-<p>summary:{{m.summary | default:'no data available'}}</p>
+<!--<img src="{% static 'images/' %}{{ m.img }}" width="200" height="200">-->
+<p>summary:{{m.description | default:'no data available'}}</p>
 <h4>Year:{{m.year}}</h4>
 {% if m.sucess %}
 <p>the movie was sucess at that time</p>
